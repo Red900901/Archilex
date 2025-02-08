@@ -1,0 +1,46 @@
+// Select DOM elements
+const form = document.querySelector("form");
+const input = document.querySelector("#wordInput");
+const resultDiv = document.querySelector(".result");
+
+// API endpoint and key (using a dictionary API)
+const apiUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+
+// Function to handle the search
+async function searchWord(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const searchTerm = input.value.trim(); // Get the search term
+    resultDiv.innerHTML = ""; // Clear any previous results
+
+    if (!searchTerm) {
+        resultDiv.innerHTML = "<p>Please enter a word to search.</p>";
+        return;
+    }
+
+    try {
+        const response = await fetch(`${apiUrl}${searchTerm}`);
+        if (!response.ok) {
+            throw new Error(`No definitions found for "${searchTerm}".`);
+        }
+
+        const data = await response.json();
+
+        // Display the word and its first definition
+        const word = data[0].word;
+        const definition = data[0].meanings[0].definitions[0].definition;
+
+        resultDiv.innerHTML = `
+            <h2>Definition of "${word}":</h2>
+            <p>${definition}</p>
+        `;
+    } catch (error) {
+        resultDiv.innerHTML = `<p><strong>Error:</strong> ${error.message}</p>`;
+    }
+
+    // Clear the input field after search
+    input.value = "";
+}
+
+// Add event listener to the form
+form.addEventListener("submit", searchWord);

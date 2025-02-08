@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Archilex</title>
+</head>
+
+<body>
+    <div class="header">
+        <img src="archilex.png" alt="Logo" class="logo">
+        <h1>Word and Book Search</h1>
+    </div>
+
+    <div>
+        <h2>Search for a Word</h2>
+        <input type="text" id="wordInput" placeholder="Enter a word">
+        <button onclick="searchWord()">Search</button>
+        <div id="wordResult" class="result-container"></div>
+    </div>
+
+    <div>
+        <h2>Search for a Book</h2>
+        <input type="text" id="bookInput" placeholder="Enter a book title">
+        <button onclick="findBook()">Search</button>
+        <div id="bookResult" class="result-container"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
